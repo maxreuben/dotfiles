@@ -42,6 +42,17 @@ let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+let g:conoline_auto_enable = 0 
+"let g:conoline_use_colorscheme_default_normal=0 "use colorscheme colors (overwrites g:conoline_color_insert_light etc.
+"let g:conoline_use_colorscheme_default_insert=0
+let g:conoline_color_insert_light = 'ctermbg=grey ctermfg=black'
+let g:conoline_color_insert_nr_light = 'ctermbg=grey ctermfg=black'
+let g:conoline_color_visual_light = 'ctermfg=166'
+let g:conoline_color_visual_nr_light = 'ctermfg=166'
+  
+" Have nerdtree ignore certain files and directories.
+let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
+
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible' "sensible defaults such as backspace delete and scroll show lines above and below
 Plug 'tpope/vim-sleuth' "adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file
@@ -124,17 +135,6 @@ noremap <ESC>[1;6C <c-w><
 nnoremap <F3> :NERDTreeToggle<cr>
 nnoremap <F4> :UndotreeToggle<CR>
  
-let g:conoline_auto_enable = 0 
-"let g:conoline_use_colorscheme_default_normal=0 "use colorscheme colors
-"let g:conoline_use_colorscheme_default_insert=0
-let g:conoline_color_insert_light = 'ctermbg=grey ctermfg=black'
-let g:conoline_color_insert_nr_light = 'ctermbg=grey ctermfg=black'
-let g:conoline_color_visual_light = 'ctermfg=166'
-let g:conoline_color_visual_nr_light = 'ctermfg=166'
-  
-" Have nerdtree ignore certain files and directories.
-let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
-
 "Following is to fix Ctrl+Arrow, vim-visual-multi not working in Alacritty
 map <ESC>[1;5A <C-Up>
 map <ESC>[1;5B <C-Down>
@@ -152,4 +152,12 @@ vmap <ESC>[1;3B <Plug>MoveBlockDown
 vmap <ESC>[1;3A   <Plug>MoveBlockUp
 nmap <ESC>[1;3B <Plug>MoveLineDown
 nmap <ESC>[1;3A   <Plug>MoveLineUp
+
+"Quit vim quicker
+inoremap <C-s> <esc>:w<cr>                 " save files
+nnoremap <C-s> <esc>:w<cr>
+noremap <C-x> <esc>:wq!<cr>                " save and exit
+nnoremap <C-x> :wq!<cr>
+inoremap <C-q> <esc>:qa!<cr>               " quit xiscarxing changes
+nnoremap <C-q> :qa!<cr>
 " }}}

@@ -1,2 +1,2 @@
 # dotfiles
-Placeto store my dots
+Place to store my dots

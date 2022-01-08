@@ -221,7 +221,7 @@ source ~/.profile
 source ~/.bash_completion/alacritty
 source ~/.bash_completion/github-cli
 
-alias alacritty-config="vi $HOME/.config/alacritty/alacritty.yml"
+alias alacritty-config="vimx $HOME/.config/alacritty/alacritty.yml"
 complete -C "dev_bestia_cargo_completion" cargo 
 
 eval "$(starship init bash)" #initialize starship shell prompt

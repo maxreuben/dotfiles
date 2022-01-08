@@ -24,7 +24,7 @@ set number "display line numbers
 set clipboard=unnamedplus "copy to system clipboard
 set history=1000 "Set the commands to save in history default number is 20.
 
-"Enable auto completion menu after pressing TAB.
+"Enable auto completion menu after pressing TAB. On by default in vimx
 "set wildmenu
 
 " Make wildmenu behave like similar to Bash completion.
@@ -42,14 +42,35 @@ let g:airline#extensions#tabline#enabled = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-let g:conoline_auto_enable = 0 
-"let g:conoline_use_colorscheme_default_normal=0 "use colorscheme colors (overwrites g:conoline_color_insert_light etc.
+let g:conoline_auto_enable = 0
+"let g:conoline_use_colorscheme_default_normal=0 "use colorscheme colors (overwrites g:conoline_color_normal* etc.)
 "let g:conoline_use_colorscheme_default_insert=0
+let g:conoline_color_normal_light = 'ctermbg=white ctermfg=17'
+let g:conoline_color_normal_nr_light = 'ctermbg=white ctermfg=17'
 let g:conoline_color_insert_light = 'ctermbg=grey ctermfg=black'
 let g:conoline_color_insert_nr_light = 'ctermbg=grey ctermfg=black'
-let g:conoline_color_visual_light = 'ctermfg=166'
-let g:conoline_color_visual_nr_light = 'ctermfg=166'
-  
+let g:conoline_color_visual_light = 'ctermbg=225 ctermfg=17'
+let g:conoline_color_visual_nr_light = 'ctermbg=225 ctermfg=17'
+
+"change cursor in different modes
+"Cursor settings:
+"  1 -> blinking block
+"  2 -> solid block 
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+if has("autocmd")
+au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+au InsertEnter,InsertChange *
+  \ if v:insertmode == 'i' | 
+  \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+  \ elseif v:insertmode == 'r' |
+  \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+  \ endif
+au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
+
 " Have nerdtree ignore certain files and directories.
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
 

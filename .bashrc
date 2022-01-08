@@ -216,11 +216,13 @@ if ! shopt -oq posix; then
 fi
 
 unset rc
-#. "$HOME/.cargo/env"
-source /home/reuben/Downloads/Programs/alacritty/completions/alacritty.bash
+
 source ~/.profile
 source ~/.bash_completion/alacritty
+source ~/.bash_completion/github-cli
+
 alias alacritty-config="vim $HOME/.config/alacritty/alacritty.yml"
 complete -C "dev_bestia_cargo_completion" cargo 
+
 eval "$(starship init bash)" #initialize starship shell prompt
 eval "$(zoxide init bash)" #initialize zoxide(z) autojump

@@ -74,6 +74,12 @@ endif
 " Have nerdtree ignore certain files and directories.
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
 
+"Persist Undo/Redo changes across sessions
+if has('persistent_undo')      "check if your vim version supports it
+  set undofile                 "turn on the feature  
+  set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
+endif  
+
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible' "sensible defaults such as backspace delete and scroll show lines above and below
 Plug 'tpope/vim-sleuth' "adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file
@@ -96,7 +102,7 @@ Plug 'mbbill/undotree'
 Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
-" If GUI version of Vim is running set these options.
+" If GVim is running set these options.
 if has('gui_running')
     colorscheme onedark
     let g:airline_theme='onedark'
